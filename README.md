@@ -30,7 +30,7 @@ The next step is to create our virtual machine (VM). To do this:
 - Purchase and download _Parallels Desktop Pro for Mac_ from https://www.parallels.com/products/desktop/pro/
 - Create a new VM using Ubuntu Linux as the operating system.
 - You can name this VM however you like, I have used _CT5168_VM1_, though this should not particularly matter. Then start the VM.
-- First we want to start by enabling SSH access to the VM. We can do this by running:
+- First we want to start by enabling SSH access to the VM. We can do this by opening a terminal and running:
 ```
 $ sudo apt install openssh-server
 $ sudo systemctl enable ssh --now
