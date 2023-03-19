@@ -59,7 +59,7 @@ Now we to set port-forwarding rules in order to open SSH access from the host to
 
 
 ### Creating the Database and Tables
-The last step is to create a database and table for store our query results. We can do this by running the below commands:
+The last step is to create a database and table for store our query results. We can do this by running the below commands on the VM:
 ```
 $ sudo docker exec -it mysqlcontainer1 /bin/sh
 sh-4.4# mysql -u root -p
@@ -71,6 +71,9 @@ sh-4.4# mysql -u root -p
    result LONGTEXT
 );
 ```
+
+### Executing a Search Query
+At this point you should be good to go. The last thing you should do is verify some of the parameters in the _main.py_ file such as _host, username, password, port, etc._ for the SSH functionality and the database connectivity. This is important as if they are not set correctly it will not work.
 
 
 ## Built With
