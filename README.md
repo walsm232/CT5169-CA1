@@ -69,6 +69,7 @@ sh-4.4# mysql -u root -p
    id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
    query VARCHAR(255),
    result LONGTEXT
+);
 ```
 
 
