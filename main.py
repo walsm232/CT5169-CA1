@@ -1,12 +1,6 @@
-from flask import Flask, render_template, request, url_for, flash
-from werkzeug.utils import redirect
-from markupsafe import Markup
-
-import base64
-
+from flask import Flask, render_template, request
 import mysql.connector
 import paramiko
-from mysql.connector import Error
 
 
 app = Flask(__name__)
@@ -23,6 +17,7 @@ def home():
 def search():
     user_query = request.form.get("query")
 
+    # connect to MySQL server running on the virtual machine
     connection = mysql.connector.connect(
         host='127.0.0.1',
         port='7888',
@@ -33,51 +28,62 @@ def search():
     cursor = connection.cursor()
 
     try:
+        # use the user's query to attempt to search for an existing result in the table
         sql_query = f"SELECT result FROM query_results WHERE query = '{user_query}';"
-        new_result = cursor.execute(sql_query)
+        cursor.execute(sql_query)
         row = cursor.fetchone()
         connection.commit()
 
-        query_result = ""
-
-        # if a result is returned from the MySQL query then set query_result to the result
+        # if a result is returned from the SQL query then set query_result to the result
         if row is not None:
             query_result = row[0]
-
-        # else SSH to the VM and execute the wiki.py script and then write the result to the database
         else:
-            host = '10.211.55.3'
-            port = 22
-            username = 'parallels'
-            password = 'studentpassword'
+            query_result = search_wikipedia(user_query)
+            write_result_to_database(user_query, query_result, connection)
 
-            con = paramiko.SSHClient()
-            con.load_system_host_keys()
-            con.connect(hostname=host, port=port, username=username, password=password)
-
-            stdin, stdout, stderr = con.exec_command('python3 /home/parallels/CA1/wiki.py "' + user_query + '"')
-            outerr = stderr.readlines()
-            output = stdout.readlines()
-
-            for item in output:
-                query_result = query_result + item
-
-            print(query_result)
-
-            sql_query = "INSERT INTO query_results (query,result) VALUES (%s,%s)"
-            args = (user_query, query_result)
-
-            cursor.execute(sql_query, args)
-            connection.commit()
-
+    # # catch all exceptions, rollback SQL transaction, and print exception
     except Exception as e:
         connection.rollback()
         print(f"Exception raised: {e}")
 
+    # # close the SQL connection
     finally:
         connection.close()
 
     return render_template("search-result.html", query=user_query, content=query_result)
+
+
+def search_wikipedia(user_query):
+    # SSH to the virtual machine
+    con = paramiko.SSHClient()
+    con.load_system_host_keys()
+    con.connect(
+        hostname='10.211.55.3',
+        port=22,
+        username='parallels',
+        password='studentpassword'
+    )
+
+    # execute the Python script and pass the user query as an argument
+    stdin, stdout, stderr = con.exec_command('python3 /home/parallels/CA1/wiki.py "' + user_query + '"')
+    outerr = stderr.readlines()
+    output = stdout.readlines()
+
+    query_result = ""
+    for item in output:
+        query_result = query_result + item
+
+    return query_result
+
+
+def write_result_to_database(user_query, query_result, connection):
+    cursor = connection.cursor()
+
+    # write the query and result to the table for future access (like a cache)
+    sql_query = "INSERT INTO query_results (query,result) VALUES (%s,%s)"
+    args = (user_query, query_result)
+    cursor.execute(sql_query, args)
+    connection.commit()
 
 
 if __name__ == '__main__':
