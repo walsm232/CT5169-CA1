@@ -10,3 +10,16 @@ The goal of this assignment was to create a distributed cloud computing applicat
 - The VM should have a Python script, named wiki.py, which takes a query as an argument. It uses this query to search and parse Wikipedia pages for information relating to it. This should be executable from the host machine.
 - The result should then be returned to the host machine and rendered neatly as HTML.
 - If it is the first time a given query is run it should write the result to the MySQL database. If the same query is run at any other point it should pull the result from the database instead of following the full process of searching and parsing Wikipedia, which improves performance.
+
+
+
+
+## Built With
+- Flask
+- Python
+- Docker
+- MySQL
+- HTML
+- CSS
+- jQuery
+- FontAwesome
