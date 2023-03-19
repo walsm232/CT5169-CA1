@@ -1,0 +1,29 @@
+body {
+    background-image: url("wikipedia.jpeg");
+}
+
+.card {
+  background-color: #fff;
+  padding: 20px;
+  max-width: 100%;
+  overflow-y: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+pre {
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+}
+
+button {
+    position: absolute;
+    top: 14px;
+    right: 5px;
+    height: 40px;
+    width: 110px;
+    background: blue;
+}
