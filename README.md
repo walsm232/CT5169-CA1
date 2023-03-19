@@ -62,9 +62,7 @@ Now we to set port-forwarding rules in order to open SSH access from the host to
 The last step is to create a database and table for store our query results. We can do this by running the below commands:
 ```
 $ sudo docker exec -it mysqlcontainer1 /bin/sh
--> then enter the password to your system user
 sh-4.4# mysql -u root -p
--> then enter the password for the _root_ database user (we set this to _mypassword__)
 >mysql CREATE DATABASE query_db;
 >mysql USE query_db;
 >mysql CREATE TABLE query_results (
