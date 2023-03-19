@@ -1,4 +1,6 @@
-# CT5169 Fundamentals of Cloud Computing 
+<h1> <div align="center"> CT5169 Fundamentals of Cloud Computing  </div> </h1>
+
+<div align="center"> <img src="static/home.png"> </div>
 
 ## Project Description
 The goal of this assignment was to create a distributed cloud computing application. The main aspects are:
