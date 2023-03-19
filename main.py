@@ -18,6 +18,7 @@ def search():
     user_query = request.form.get("query")
 
     # connect to MySQL server running on the virtual machine
+    # port, database, user, and password may need to be updated depending on your situation / configuration
     connection = mysql.connector.connect(
         host='127.0.0.1',
         port='7888',
@@ -26,6 +27,8 @@ def search():
         password='mypassword'
     )
     cursor = connection.cursor()
+
+    query_result = ""
 
     try:
         # use the user's query to attempt to search for an existing result in the table
@@ -55,6 +58,7 @@ def search():
 
 def search_wikipedia(user_query):
     # SSH to the virtual machine
+    # hostname, username, and password may need to be updated depending on your situation / configuration
     con = paramiko.SSHClient()
     con.load_system_host_keys()
     con.connect(
@@ -65,6 +69,7 @@ def search_wikipedia(user_query):
     )
 
     # execute the Python script and pass the user query as an argument
+    # must ensure that the wiki.py file exists and the path is correct on the VM
     stdin, stdout, stderr = con.exec_command('python3 /home/parallels/CA1/wiki.py "' + user_query + '"')
     outerr = stderr.readlines()
     output = stdout.readlines()
