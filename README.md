@@ -84,6 +84,10 @@ At this point you should be good to go. The last thing you should do is verify s
 <div align="center"> <img src="static/search.png"> </div>
 
 
+### Network Configuration
+<div align="center"> <img src="static/networking-configuration.png"> </div>
+
+
 ## Built With
 - Flask
 - Python
