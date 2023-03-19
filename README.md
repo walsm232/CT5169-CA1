@@ -53,7 +53,25 @@ $ sudo docker run --name "mysqlcontainer1" -e MYSQL_ROOT_HOST=% -e MYSQL_ROOT_PA
 
 
 ### Setting Port-Forwarding Rules
-Now we to set port-forwarding rules in order to open SSH access from the host to the VM and also to allow us to access the MySQL database from the host machine.
+Now we to set port-forwarding rules in order to open SSH access from the host to the VM and also to allow us to access the MySQL database from the host machine. We need to set the below rules in order for this to work correctly.
+
+<div align="center"> <img src="static/port-forwarding.png"> </div>
+
+
+### Creating the Database and Tables
+The last step is to create a database and table for store our query results. We can do this by running the below commands:
+```
+$ sudo docker exec -it mysqlcontainer1 /bin/sh
+-> then enter the password to your system user
+sh-4.4# mysql -u root -p
+-> then enter the password for the _root_ database user (we set this to _mypassword__)
+>mysql CREATE DATABASE query_db;
+>mysql USE query_db;
+>mysql CREATE TABLE query_results (
+   id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   query VARCHAR(255),
+   result LONGTEXT
+```
 
 
 ## Built With
