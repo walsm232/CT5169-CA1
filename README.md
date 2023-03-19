@@ -44,7 +44,7 @@ $ sudo add-apt-repository "deb [arch=arm64] https://download.docker.com/linux/ub
 $ sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 ```
 - Verify that the installation worked correctly by running `$ docker version`.
-- To run our MySQL database we need to run:
+- To run our MySQL database we need to execute:
 ```
 $ sudo docker pull mysql/mysql-server:latest
 $ sudo docker run --name "mysqlcontainer1" -e MYSQL_ROOT_HOST=% -e MYSQL_ROOT_PASSWORD=mypassword -d -p 6603:3306 mysql/mysql-server:latest
