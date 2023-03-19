@@ -41,12 +41,12 @@ def search():
             query_result = search_wikipedia(user_query)
             write_result_to_database(user_query, query_result, connection)
 
-    # # catch all exceptions, rollback SQL transaction, and print exception
+    # catch all exceptions, rollback SQL transaction, and print exception
     except Exception as e:
         connection.rollback()
         print(f"Exception raised: {e}")
 
-    # # close the SQL connection
+    # close the SQL connection
     finally:
         connection.close()
 
