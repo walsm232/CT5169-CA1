@@ -73,7 +73,9 @@ sh-4.4# mysql -u root -p
 ```
 
 ### Executing a Search Query
-At this point you should be good to go. The last thing you should do is verify some of the parameters in the _main.py_ file such as _host, username, password, port, etc._ for the SSH functionality and the database connectivity. This is important as if they are not set correctly it will not work.
+At this point you should be good to go. The last thing you should do is verify some of the parameters in the _main.py_ file such as _host, username, password, port, etc._ for the SSH functionality and the database connectivity. This is important as if they are not set correctly it will not work. If you type a query into the search bar you should see a result returned such as the one below. If you try to issue a query which you have already used you will notice a significant performance improvement as it is pulled straight from the database.
+
+<div align="center"> <img src="static/search.png"> </div>
 
 
 ## Built With
@@ -85,3 +87,6 @@ At this point you should be good to go. The last thing you should do is verify s
 - CSS
 - jQuery
 - FontAwesome
+
+## Credits
+**Developer:** Michael Walsh  
