@@ -65,7 +65,10 @@ def search_wikipedia(user_query):
         hostname='127.0.0.1',
         port=2233,
         username='parallels',
-        password='studentpassword'
+        password='studentpassword',
+        banner_timeout=100,
+        auth_timeout=100,
+        timeout=100,
     )
 
     # execute the Python script and pass the user query as an argument
