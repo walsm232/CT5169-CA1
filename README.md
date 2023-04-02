@@ -8,8 +8,8 @@
 The goal of this assignment was to create a distributed cloud computing application. The main aspects are:
 - A host machine which runs a Flask webserver. The website should provide a search bar which allows the user to search for Wikipedia results.
 - Virtualization software is used (_Parallels Desktop Pro_) on the host machine to run a virtual machine (VM) running Ubuntu OS.
+- VM1 runs a MySQL database as a Docker container and exposes it on port 6603.
 - VM2 has a Python script, named _wiki.py_, which takes a query as an argument. It uses this query to search and parse Wikipedia pages for information relating to it. This is able to be executed from the host machine through SSH using Paramiko.
-- VM2 runs a MySQL database as a Docker container and exposes it on port 6603.
 - The result is returned to the host machine and rendered neatly as HTML.
 - If it is the first time a given query is run then the result is written to the MySQL database on VM1. If the same query is run at any other point it will pull the result from the database instead of following the full process of searching and parsing Wikipedia, which improves overall performance.
 
