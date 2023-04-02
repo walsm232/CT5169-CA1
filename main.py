@@ -62,8 +62,8 @@ def search_wikipedia(user_query):
     con = paramiko.SSHClient()
     con.load_system_host_keys()
     con.connect(
-        hostname='10.211.55.3',
-        port=22,
+        hostname='127.0.0.1',
+        port=2233,
         username='parallels',
         password='studentpassword'
     )
